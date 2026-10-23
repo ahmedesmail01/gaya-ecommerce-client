@@ -1,3 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+
+@theme {
+  /* Typography */
+  --font-heading: "Bodoni Moda", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+
+  /* Brand colors */
+  --color-brand-black: #000000;
+  --color-brand-white: #ffffff;
+  --color-brand-ivory: #f5f2ec;
+  --color-brand-stone: #b7aea1;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-brand-ivory);
+    color: var(--color-brand-black);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-heading);
+  }
+}
