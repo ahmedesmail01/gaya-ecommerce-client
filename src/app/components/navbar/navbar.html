@@ -7,30 +7,61 @@
       <span class="self-center text-xl text-heading font-semibold whitespace-nowrap"></span>
   </a>
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button" class="flex text-sm bg-neutral-primary rounded-full md:me-0 focus:ring-4 focus:ring-neutral-tertiary" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      <button
+        type="button"
+        id="user-menu-button"
+        class="flex rounded-full ring-1 ring-brand-black/10 ring-offset-2 ring-offset-brand-white transition
+               hover:ring-brand-black focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-black"
+        aria-expanded="false"
+        data-dropdown-toggle="user-dropdown"
+        data-dropdown-placement="bottom-end"
+        data-dropdown-offset-distance="14"
+      >
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://ahmed-esmail-dev.vercel.app/images/responsive/ahmed-esmail-portrait-4a67c2ca6d19-640.webp" alt="user photo">
+        <img class="h-9 w-9 rounded-full object-cover" src="https://ahmed-esmail-dev.vercel.app/images/responsive/ahmed-esmail-portrait-4a67c2ca6d19-640.webp" alt="user photo">
       </button>
       <!-- Dropdown menu -->
-      <div class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44" id="user-dropdown">
-        <div class="px-4 py-3 text-sm border-b border-default">
-          <span class="block text-heading font-medium">Joseph McFall</span>
-          <span class="block text-body truncate">name@flowbite.com</span>
+      <div
+        id="user-dropdown"
+        class="z-50 hidden w-64 border border-brand-black/10 bg-brand-white font-body text-brand-black shadow-[0_20px_40px_-12px_rgba(0,0,0,0.18)]"
+      >
+        <div class="flex items-center gap-3 bg-brand-ivory px-5 py-4">
+          <img class="h-10 w-10 rounded-full object-cover" src="https://ahmed-esmail-dev.vercel.app/images/responsive/ahmed-esmail-portrait-4a67c2ca6d19-640.webp" alt="">
+          <div class="min-w-0">
+            <p class="truncate font-heading text-base">Joseph McFall</p>
+            <p class="truncate text-xs text-brand-black/50">name&#64;flowbite.com</p>
+          </div>
         </div>
-        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
-          </li>
-          <li>
-            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
-          </li>
-          <li>
-            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</a>
-          </li>
+
+        <ul class="py-2 text-sm" aria-labelledby="user-menu-button">
+          @for (item of menuItems; track item.label) {
+            <li>
+              <a
+                href="#"
+                class="group flex items-center gap-3 px-5 py-2.5 text-brand-black/70 transition
+                       hover:bg-brand-ivory hover:text-brand-black focus:bg-brand-ivory focus:text-brand-black focus:outline-none"
+              >
+                <svg class="h-4 w-4 text-brand-stone transition group-hover:text-brand-black" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" [attr.d]="item.icon" />
+                </svg>
+                {{ item.label }}
+              </a>
+            </li>
+          }
         </ul>
+
+        <div class="border-t border-brand-black/10 p-2">
+          <a
+            href="#"
+            class="flex items-center justify-between px-3 py-2.5 text-xs uppercase tracking-[0.2em] transition
+                   hover:bg-brand-black hover:text-brand-white focus:bg-brand-black focus:text-brand-white focus:outline-none"
+          >
+            Sign out
+            <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12H4m11 0-4-4m4 4-4 4M20 4v16" />
+            </svg>
+          </a>
+        </div>
       </div>
       <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary" aria-controls="navbar-user" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
@@ -40,16 +71,16 @@
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
     <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
       <li>
-        <a href="#" class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
+        <a routerLink="/" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent aria-[current=page]:text-fg-brand">Home</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Products</a>
+        <a routerLink="/products" routerLinkActive ariaCurrentWhenActive="page" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent aria-[current=page]:text-fg-brand">Products</a>
       </li>
       <li>
-        <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Categories</a>
+        <a routerLink="/categories" routerLinkActive ariaCurrentWhenActive="page" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent aria-[current=page]:text-fg-brand">Categories</a>
       </li>
      <li>
-        <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">About</a>
+        <a routerLink="/about" routerLinkActive ariaCurrentWhenActive="page" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent aria-[current=page]:text-fg-brand">About</a>
       </li>
       <!-- <li>
         <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>

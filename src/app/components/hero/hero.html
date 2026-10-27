@@ -1,0 +1,68 @@
+<section class="relative overflow-hidden bg-brand-ivory pt-24 text-brand-black">
+  <div class="mx-auto grid max-w-screen-xl items-center gap-12 px-6 py-12 md:py-20 lg:grid-cols-12 lg:gap-8">
+    <!-- Copy -->
+    <div class="lg:col-span-6">
+      <p class="rise font-body text-xs uppercase tracking-[0.3em] text-brand-stone">
+        Gaya-Store &middot; New season
+      </p>
+
+      <h1 class="rise mt-6 font-heading text-5xl leading-[1.05] sm:text-6xl xl:text-8xl [animation-delay:120ms]">
+        Wear your
+        <em class="block font-normal italic">confidence.</em>
+      </h1>
+
+      <p class="rise mt-8 max-w-md font-body text-base leading-relaxed text-brand-black/70 [animation-delay:240ms]">
+        Modern essentials for your everyday wardrobe — timeless cuts, honest fabrics,
+        and pieces made to be lived in.
+      </p>
+
+      <div class="rise mt-10 flex flex-wrap items-center gap-4 [animation-delay:360ms]">
+        <a
+          href="#collection"
+          class="group inline-flex items-center gap-3 bg-brand-black px-8 py-4 font-body text-xs uppercase
+                 tracking-[0.2em] text-brand-white transition hover:bg-brand-black/80"
+        >
+          Shop collection
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-6-6 6 6-6 6" />
+          </svg>
+        </a>
+        <a
+          href="#collection"
+          class="px-2 py-4 font-body text-xs uppercase tracking-[0.2em] underline decoration-brand-stone
+                 underline-offset-8 transition hover:decoration-brand-black"
+        >
+          New arrivals
+        </a>
+      </div>
+
+      <ul class="rise mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-brand-black/10 pt-6 font-body text-xs text-brand-black/60 [animation-delay:480ms]">
+        @for (perk of perks; track perk) {
+          <li class="flex items-center gap-2">
+            <span class="h-1 w-1 rounded-full bg-brand-stone"></span>
+            {{ perk }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Imagery -->
+    <div class="rise relative lg:col-span-6 [animation-delay:200ms]">
+      <div class="absolute -right-6 -top-6 hidden h-full w-3/4 bg-brand-stone/25 lg:block"></div>
+
+      <div class="relative overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=80"
+          alt="A rail of neutral-toned garments on wooden hangers"
+          class="aspect-[4/5] w-full object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="absolute -bottom-6 left-6 bg-brand-white px-6 py-5 shadow-sm sm:left-10">
+        <p class="font-body text-[10px] uppercase tracking-[0.3em] text-brand-stone">Season edit</p>
+        <p class="mt-1 font-heading text-2xl">The Essentials</p>
+      </div>
+    </div>
+  </div>
+</section>
