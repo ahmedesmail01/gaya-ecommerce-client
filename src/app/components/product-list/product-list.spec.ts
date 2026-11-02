@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { ProductList } from './product-list';
 
 describe('ProductList', () => {
@@ -10,7 +13,8 @@ describe('ProductList', () => {
       imports: [ProductList],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ProductList);
+    fixture =
+      TestBed.createComponent(ProductList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

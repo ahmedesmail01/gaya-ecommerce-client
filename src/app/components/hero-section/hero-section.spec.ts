@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { HeroSection } from './hero-section';
 
 describe('HeroSection', () => {
@@ -10,7 +13,8 @@ describe('HeroSection', () => {
       imports: [HeroSection],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HeroSection);
+    fixture =
+      TestBed.createComponent(HeroSection);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

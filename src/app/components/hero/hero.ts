@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 
 @Component({
   imports: [],
@@ -8,5 +11,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Hero {
-  protected readonly perks = ['Free shipping over $100', 'Easy 30-day returns', 'Thoughtfully made'];
+  protected readonly perks = [
+    'Free shipping over $100',
+    'Easy 30-day returns',
+    'Thoughtfully made',
+  ];
 }

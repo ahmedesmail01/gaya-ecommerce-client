@@ -5,8 +5,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   it('should create the app', () => {
@@ -18,7 +17,10 @@ describe('App', () => {
   it('should render title', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, gaya-ecommerce-client');
+    const compiled =
+      fixture.nativeElement as HTMLElement;
+    expect(
+      compiled.querySelector('h1')?.textContent,
+    ).toContain('Hello, gaya-ecommerce-client');
   });
 });

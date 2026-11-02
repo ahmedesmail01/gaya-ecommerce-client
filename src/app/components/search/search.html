@@ -1,0 +1,70 @@
+<form
+  role="search"
+  class="w-full max-w-xl font-body text-brand-black"
+  (submit)="onSubmit($event)"
+>
+  <label for="search-input" class="sr-only">
+    Search products
+  </label>
+  <div
+    class="group flex items-center gap-3 border border-brand-black/15 bg-brand-white px-4 transition focus-within:border-brand-black hover:border-brand-black/40"
+  >
+    <svg
+      class="h-5 w-5 shrink-0 text-brand-stone transition group-focus-within:text-brand-black"
+      aria-hidden="true"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-width="1.5"
+        d="m21 21-4.35-4.35M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"
+      />
+    </svg>
+
+    <input
+      id="search-input"
+      type="search"
+      name="q"
+      autocomplete="off"
+      placeholder="Search for products, categories…"
+      class="w-full border-0 bg-transparent py-3 text-sm placeholder:text-brand-black/40 focus:ring-0 focus:outline-none [&::-webkit-search-cancel-button]:hidden"
+      [value]="query()"
+      (input)="
+        query.set($any($event.target).value)
+      "
+      (keydown.escape)="clear()"
+    />
+
+    @if (query()) {
+      <button
+        type="button"
+        class="shrink-0 rounded-full p-1 text-brand-black/50 transition hover:bg-brand-ivory hover:text-brand-black focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-black"
+        (click)="clear()"
+      >
+        <span class="sr-only">Clear search</span>
+        <svg
+          class="h-4 w-4"
+          aria-hidden="true"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.5"
+            d="M6 6l12 12M18 6 6 18"
+          />
+        </svg>
+      </button>
+    }
+
+    <button
+      type="submit"
+      class="-mr-4 shrink-0 self-stretch bg-brand-black px-5 text-xs tracking-[0.2em] text-brand-white uppercase transition hover:bg-brand-black/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone"
+    >
+      Search
+    </button>
+  </div>
+</form>

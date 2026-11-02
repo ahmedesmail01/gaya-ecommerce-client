@@ -1,25 +1,46 @@
 <!-- Intro -->
-<section class="bg-brand-ivory pt-24 text-brand-black">
-  <div class="mx-auto max-w-screen-xl px-6 py-16 md:py-24">
-    <p class="rise font-body text-xs uppercase tracking-[0.3em] text-brand-stone">About Gaya-Store</p>
+<section
+  class="bg-brand-ivory pt-24 text-brand-black"
+>
+  <div
+    class="mx-auto max-w-screen-xl px-6 py-16 md:py-24"
+  >
+    <p
+      class="rise font-body text-xs tracking-[0.3em] text-brand-stone uppercase"
+    >
+      About Gaya-Store
+    </p>
 
-    <h1 class="rise mt-6 max-w-4xl font-heading text-5xl leading-[1.05] sm:text-6xl xl:text-7xl [animation-delay:120ms]">
+    <h1
+      class="rise mt-6 max-w-4xl font-heading text-5xl leading-[1.05] [animation-delay:120ms] sm:text-6xl xl:text-7xl"
+    >
       Clothes made to be
-      <em class="font-normal italic">lived in.</em>
+      <em class="font-normal italic">
+        lived in.
+      </em>
     </h1>
 
-    <p class="rise mt-8 max-w-xl font-body text-base leading-relaxed text-brand-black/70 [animation-delay:240ms]">
-      Gaya-Store began with a simple idea: a wardrobe should be built from fewer, better pieces.
-      We make modern essentials with honest fabrics and quiet details — clothes you reach for again and again.
+    <p
+      class="rise mt-8 max-w-xl font-body text-base leading-relaxed text-brand-black/70 [animation-delay:240ms]"
+    >
+      Gaya-Store began with a simple idea: a
+      wardrobe should be built from fewer, better
+      pieces. We make modern essentials with
+      honest fabrics and quiet details — clothes
+      you reach for again and again.
     </p>
   </div>
 </section>
 
 <!-- Story -->
 <section class="bg-brand-white text-brand-black">
-  <div class="mx-auto grid max-w-screen-xl items-center gap-12 px-6 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
+  <div
+    class="mx-auto grid max-w-screen-xl items-center gap-12 px-6 py-16 md:py-24 lg:grid-cols-12 lg:gap-16"
+  >
     <div class="relative lg:col-span-6">
-      <div class="absolute -left-6 -top-6 hidden h-full w-3/4 bg-brand-stone/25 lg:block"></div>
+      <div
+        class="absolute -top-6 -left-6 hidden h-full w-3/4 bg-brand-stone/25 lg:block"
+      ></div>
       <img
         src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&q=80"
         alt="Inside a calm, minimal clothing boutique"
@@ -29,16 +50,33 @@
     </div>
 
     <div class="lg:col-span-6">
-      <p class="font-body text-xs uppercase tracking-[0.3em] text-brand-stone">Our story</p>
-      <h2 class="mt-4 font-heading text-4xl leading-tight sm:text-5xl">From a small studio to your everyday wardrobe.</h2>
-      <div class="mt-8 space-y-5 font-body text-base leading-relaxed text-brand-black/70">
+      <p
+        class="font-body text-xs tracking-[0.3em] text-brand-stone uppercase"
+      >
+        Our story
+      </p>
+      <h2
+        class="mt-4 font-heading text-4xl leading-tight sm:text-5xl"
+      >
+        From a small studio to your everyday
+        wardrobe.
+      </h2>
+      <div
+        class="mt-8 space-y-5 font-body text-base leading-relaxed text-brand-black/70"
+      >
         <p>
-          What started as a handful of pieces sewn in a small studio has grown into a collection worn across the country.
-          Our approach hasn't changed: design slowly, choose materials carefully, and make every garment earn its place.
+          What started as a handful of pieces sewn
+          in a small studio has grown into a
+          collection worn across the country. Our
+          approach hasn't changed: design slowly,
+          choose materials carefully, and make
+          every garment earn its place.
         </p>
         <p>
-          Each collection is built around versatile silhouettes and a neutral palette, so everything you buy works with
-          what you already own.
+          Each collection is built around
+          versatile silhouettes and a neutral
+          palette, so everything you buy works
+          with what you already own.
         </p>
       </div>
     </div>
@@ -46,12 +84,26 @@
 </section>
 
 <!-- Stats -->
-<section class="border-y border-brand-black/10 bg-brand-ivory text-brand-black">
-  <dl class="mx-auto grid max-w-screen-xl grid-cols-2 gap-y-10 px-6 py-14 md:grid-cols-4">
+<section
+  class="border-y border-brand-black/10 bg-brand-ivory text-brand-black"
+>
+  <dl
+    class="mx-auto grid max-w-screen-xl grid-cols-2 gap-y-10 px-6 py-14 md:grid-cols-4"
+  >
     @for (stat of stats; track stat.label) {
-      <div class="flex flex-col-reverse text-center">
-        <dt class="mt-2 font-body text-xs uppercase tracking-[0.2em] text-brand-black/60">{{ stat.label }}</dt>
-        <dd class="font-heading text-4xl sm:text-5xl">{{ stat.value }}</dd>
+      <div
+        class="flex flex-col-reverse text-center"
+      >
+        <dt
+          class="mt-2 font-body text-xs tracking-[0.2em] text-brand-black/60 uppercase"
+        >
+          {{ stat.label }}
+        </dt>
+        <dd
+          class="font-heading text-4xl sm:text-5xl"
+        >
+          {{ stat.value }}
+        </dd>
       </div>
     }
   </dl>
@@ -59,18 +111,49 @@
 
 <!-- Values -->
 <section class="bg-brand-white text-brand-black">
-  <div class="mx-auto max-w-screen-xl px-6 py-16 md:py-24">
-    <p class="font-body text-xs uppercase tracking-[0.3em] text-brand-stone">What we stand for</p>
-    <h2 class="mt-4 max-w-2xl font-heading text-4xl leading-tight sm:text-5xl">Fewer, better things.</h2>
+  <div
+    class="mx-auto max-w-screen-xl px-6 py-16 md:py-24"
+  >
+    <p
+      class="font-body text-xs tracking-[0.3em] text-brand-stone uppercase"
+    >
+      What we stand for
+    </p>
+    <h2
+      class="mt-4 max-w-2xl font-heading text-4xl leading-tight sm:text-5xl"
+    >
+      Fewer, better things.
+    </h2>
 
-    <div class="mt-14 grid gap-px bg-brand-black/10 md:grid-cols-3">
+    <div
+      class="mt-14 grid gap-px bg-brand-black/10 md:grid-cols-3"
+    >
       @for (value of values; track value.title) {
-        <article class="bg-brand-white p-8 lg:p-10">
-          <svg class="h-6 w-6 text-brand-black" aria-hidden="true" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" [attr.d]="value.icon" />
+        <article
+          class="bg-brand-white p-8 lg:p-10"
+        >
+          <svg
+            class="h-6 w-6 text-brand-black"
+            aria-hidden="true"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              [attr.d]="value.icon"
+            />
           </svg>
-          <h3 class="mt-6 font-heading text-2xl">{{ value.title }}</h3>
-          <p class="mt-3 font-body text-sm leading-relaxed text-brand-black/70">{{ value.text }}</p>
+          <h3 class="mt-6 font-heading text-2xl">
+            {{ value.title }}
+          </h3>
+          <p
+            class="mt-3 font-body text-sm leading-relaxed text-brand-black/70"
+          >
+            {{ value.text }}
+          </p>
         </article>
       }
     </div>
@@ -79,18 +162,33 @@
 
 <!-- CTA -->
 <section class="bg-brand-black text-brand-white">
-  <div class="mx-auto flex max-w-screen-xl flex-col items-start justify-between gap-8 px-6 py-16 md:flex-row md:items-center md:py-20">
-    <h2 class="max-w-xl font-heading text-3xl leading-tight sm:text-4xl">
-      Find the pieces you'll <em class="font-normal italic">keep.</em>
+  <div
+    class="mx-auto flex max-w-screen-xl flex-col items-start justify-between gap-8 px-6 py-16 md:flex-row md:items-center md:py-20"
+  >
+    <h2
+      class="max-w-xl font-heading text-3xl leading-tight sm:text-4xl"
+    >
+      Find the pieces you'll
+      <em class="font-normal italic">keep.</em>
     </h2>
     <a
       routerLink="/products"
-      class="group inline-flex items-center gap-3 bg-brand-white px-8 py-4 font-body text-xs uppercase
-             tracking-[0.2em] text-brand-black transition hover:bg-brand-ivory"
+      class="group inline-flex items-center gap-3 bg-brand-white px-8 py-4 font-body text-xs tracking-[0.2em] text-brand-black uppercase transition hover:bg-brand-ivory"
     >
       Shop the collection
-      <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-6-6 6 6-6 6" />
+      <svg
+        class="h-4 w-4 transition-transform group-hover:translate-x-1"
+        aria-hidden="true"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M5 12h14m-6-6 6 6-6 6"
+        />
       </svg>
     </a>
   </div>
