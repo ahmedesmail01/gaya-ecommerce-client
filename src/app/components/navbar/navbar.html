@@ -29,9 +29,7 @@
         data-dropdown-placement="bottom-end"
         data-dropdown-offset-distance="14"
       >
-        <span class="sr-only">
-          Open user menu
-        </span>
+        <span class="sr-only">Open user menu</span>
         <img
           class="h-9 w-9 rounded-full object-cover"
           src="https://ahmed-esmail-dev.vercel.app/images/responsive/ahmed-esmail-portrait-4a67c2ca6d19-640.webp"
@@ -43,36 +41,24 @@
         id="user-dropdown"
         class="z-50 hidden w-64 border border-brand-black/10 bg-brand-white font-body text-brand-black shadow-[0_20px_40px_-12px_rgba(0,0,0,0.18)]"
       >
-        <div
-          class="flex items-center gap-3 bg-brand-ivory px-5 py-4"
-        >
+        <div class="flex items-center gap-3 bg-brand-ivory px-5 py-4">
           <img
             class="h-10 w-10 rounded-full object-cover"
             src="https://ahmed-esmail-dev.vercel.app/images/responsive/ahmed-esmail-portrait-4a67c2ca6d19-640.webp"
             alt=""
           />
           <div class="min-w-0">
-            <p
-              class="truncate font-heading text-base"
-            >
+            <p class="truncate font-heading text-base">
               Joseph McFall
             </p>
-            <p
-              class="truncate text-xs text-brand-black/50"
-            >
+            <p class="truncate text-xs text-brand-black/50">
               name&#64;flowbite.com
             </p>
           </div>
         </div>
 
-        <ul
-          class="py-2 text-sm"
-          aria-labelledby="user-menu-button"
-        >
-          @for (
-            item of menuItems;
-            track item.label
-          ) {
+        <ul class="py-2 text-sm" aria-labelledby="user-menu-button">
+          @for (item of menuItems; track item.label) {
             <li>
               <a
                 href="#"
@@ -98,9 +84,7 @@
           }
         </ul>
 
-        <div
-          class="border-t border-brand-black/10 p-2"
-        >
+        <div class="border-t border-brand-black/10 p-2">
           <a
             href="#"
             class="flex items-center justify-between px-3 py-2.5 text-xs tracking-[0.2em] uppercase transition hover:bg-brand-black hover:text-brand-white focus:bg-brand-black focus:text-brand-white focus:outline-none"
@@ -130,9 +114,7 @@
         aria-controls="navbar-user"
         aria-expanded="false"
       >
-        <span class="sr-only">
-          Open main menu
-        </span>
+        <span class="sr-only">Open main menu</span>
         <svg
           class="h-6 w-6"
           aria-hidden="true"

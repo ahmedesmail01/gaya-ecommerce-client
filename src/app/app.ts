@@ -11,9 +11,7 @@ import { Footer } from './components/footer/footer';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal(
-    'gaya-ecommerce-client',
-  );
+  protected readonly title = signal('gaya-ecommerce-client');
   ngOnInit() {
     initFlowbite();
   }

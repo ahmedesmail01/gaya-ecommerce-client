@@ -1,8 +1,4 @@
-import {
-  Component,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 @Component({
   imports: [],

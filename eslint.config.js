@@ -7,12 +7,7 @@ const prettier = require('eslint-config-prettier/flat');
 
 module.exports = defineConfig([
   {
-    ignores: [
-      'dist/',
-      'coverage/',
-      '.angular/',
-      'node_modules/',
-    ],
+    ignores: ['dist/', 'coverage/', '.angular/', 'node_modules/'],
   },
   {
     files: ['**/*.ts'],
@@ -44,12 +39,9 @@ module.exports = defineConfig([
 
       // Angular best practices
       '@angular-eslint/prefer-signals': 'warn',
-      '@angular-eslint/prefer-output-readonly':
-        'error',
-      '@angular-eslint/no-async-lifecycle-method':
-        'error',
-      '@angular-eslint/use-lifecycle-interface':
-        'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/no-async-lifecycle-method': 'error',
+      '@angular-eslint/use-lifecycle-interface': 'error',
 
       // TypeScript
       '@typescript-eslint/no-unused-vars': [
@@ -59,26 +51,19 @@ module.exports = defineConfig([
           varsIgnorePattern: '^_',
         },
       ],
-      '@typescript-eslint/consistent-type-imports':
-        [
-          'error',
-          { fixStyle: 'inline-type-imports' },
-        ],
-      '@typescript-eslint/explicit-member-accessibility':
-        ['error', { accessibility: 'no-public' }],
-      '@typescript-eslint/no-explicit-any':
-        'warn',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { fixStyle: 'inline-type-imports' },
+      ],
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
+        { accessibility: 'no-public' },
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
 
       // General
-      eqeqeq: [
-        'error',
-        'always',
-        { null: 'ignore' },
-      ],
-      'no-console': [
-        'warn',
-        { allow: ['warn', 'error'] },
-      ],
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'error',
       'no-var': 'error',
       'object-shorthand': 'error',
@@ -97,14 +82,11 @@ module.exports = defineConfig([
       angular.configs.templateAccessibility,
     ],
     rules: {
-      '@angular-eslint/template/prefer-control-flow':
-        'error',
-      '@angular-eslint/template/prefer-self-closing-tags':
-        'error',
+      '@angular-eslint/template/prefer-control-flow': 'error',
+      '@angular-eslint/template/prefer-self-closing-tags': 'error',
       '@angular-eslint/template/no-any': 'warn',
       '@angular-eslint/template/eqeqeq': 'error',
-      '@angular-eslint/template/button-has-type':
-        'error',
+      '@angular-eslint/template/button-has-type': 'error',
     },
   },
 ]);

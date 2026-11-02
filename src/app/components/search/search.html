@@ -3,9 +3,7 @@
   class="w-full max-w-xl font-body text-brand-black"
   (submit)="onSubmit($event)"
 >
-  <label for="search-input" class="sr-only">
-    Search products
-  </label>
+  <label for="search-input" class="sr-only">Search products</label>
   <div
     class="group flex items-center gap-3 border border-brand-black/15 bg-brand-white px-4 transition focus-within:border-brand-black hover:border-brand-black/40"
   >
@@ -31,10 +29,11 @@
       placeholder="Search for products, categories…"
       class="w-full border-0 bg-transparent py-3 text-sm placeholder:text-brand-black/40 focus:ring-0 focus:outline-none [&::-webkit-search-cancel-button]:hidden"
       [value]="query()"
-      (input)="
-        query.set($any($event.target).value)
-      "
-      (keydown.escape)="clear()"
+      (input)="query.set($any($event.target).value)"
+      (keydown.enter)="onSubmit($event)"
+      /* [value]="query()"
+      (input)="query.set($any($event.target).value)"
+      (keydown.escape)="clear()" */
     />
 
     @if (query()) {

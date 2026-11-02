@@ -18,17 +18,13 @@ export const routes: Routes = [
   {
     path: 'products',
     loadComponent: () =>
-      import('./pages/products/products').then(
-        (m) => m.Products,
-      ),
+      import('./pages/products/products').then((m) => m.Products),
     title: 'Gaya-Store',
   },
   {
     path: 'about',
     loadComponent: () =>
-      import('./pages/about/about').then(
-        (m) => m.About,
-      ),
+      import('./pages/about/about').then((m) => m.About),
     title: 'Gaya-Store',
   },
   {
