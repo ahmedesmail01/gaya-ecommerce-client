@@ -22,6 +22,14 @@ export const routes: Routes = [
     title: 'Gaya-Store',
   },
   {
+    path: 'products/:id',
+    loadComponent: () =>
+      import('./components/product-details/product-details').then(
+        (m) => m.ProductDetails,
+      ),
+    title: 'Gaya-Store',
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about').then((m) => m.About),

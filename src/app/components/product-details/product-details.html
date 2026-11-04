@@ -1,0 +1,164 @@
+<section class="mx-auto max-w-screen-xl px-6 py-28 font-body">
+  <a
+    routerLink="/products"
+    class="group mb-10 inline-flex items-center gap-2 text-xs tracking-[0.2em] text-brand-black/60 uppercase transition hover:text-brand-black"
+  >
+    <svg
+      class="h-4 w-4 transition group-hover:-translate-x-1"
+      aria-hidden="true"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        d="M19 12H5m0 0 6-6m-6 6 6 6"
+      />
+    </svg>
+    Back to collection
+  </a>
+
+  @if (product.isLoading()) {
+    <div
+      class="grid animate-pulse gap-12 md:grid-cols-2"
+      aria-busy="true"
+      aria-label="Loading product"
+    >
+      <div class="aspect-[3/4] w-full bg-brand-stone/20"></div>
+      <div class="space-y-4 pt-4">
+        <div class="h-3 w-1/4 bg-brand-stone/20"></div>
+        <div class="h-10 w-3/4 bg-brand-stone/20"></div>
+        <div class="h-6 w-1/5 bg-brand-stone/20"></div>
+        <div class="h-24 w-full bg-brand-stone/20"></div>
+        <div class="h-12 w-full bg-brand-stone/20"></div>
+      </div>
+    </div>
+  } @else if (product.error()) {
+    <div class="flex flex-col items-center py-24 text-center">
+      <h1 class="font-heading text-3xl">Product not found</h1>
+      <p class="mt-3 max-w-sm text-sm text-brand-black/60">
+        We couldn't load this piece. It may no longer be available.
+      </p>
+      <button
+        type="button"
+        class="mt-8 border border-brand-black px-8 py-3 text-xs tracking-[0.2em] uppercase transition hover:bg-brand-black hover:text-brand-white"
+        (click)="product.reload()"
+      >
+        Try again
+      </button>
+    </div>
+  } @else if (product.value(); as item) {
+    @let soldOut = item.unitInStock === 0;
+    <article class="grid gap-12 md:grid-cols-2 lg:gap-20">
+      <!-- Image -->
+      <div class="relative overflow-hidden bg-brand-white">
+        <img
+          [src]="item.imageUrl"
+          [alt]="item.name"
+          class="aspect-[3/4] w-full object-cover"
+          [class.opacity-60]="soldOut"
+        />
+        @if (soldOut) {
+          <span
+            class="absolute top-4 left-4 bg-brand-black px-3 py-1 text-[10px] tracking-[0.2em] text-brand-white uppercase"
+          >
+            Sold out
+          </span>
+        }
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col md:pt-4">
+        <p class="text-xs tracking-[0.2em] text-brand-stone uppercase">
+          SKU {{ item.sku }}
+        </p>
+        <h1 class="mt-3 font-heading text-4xl leading-tight md:text-5xl">
+          {{ item.name }}
+        </h1>
+        <p class="mt-4 text-2xl">{{ item.unitePrice | currency }}</p>
+
+        <p class="mt-6 flex items-center gap-2 text-sm">
+          <span
+            class="h-2 w-2 rounded-full"
+            [class]="soldOut ? 'bg-red-600' : 'bg-green-600'"
+            aria-hidden="true"
+          ></span>
+          @if (soldOut) {
+            Out of stock
+          } @else if (item.unitInStock <= 5) {
+            Only {{ item.unitInStock }} left
+          } @else {
+            In stock
+          }
+        </p>
+
+        <p
+          class="mt-8 border-t border-brand-black/10 pt-8 leading-relaxed text-brand-black/70"
+        >
+          {{ item.description }}
+        </p>
+
+        <!-- Quantity + add to bag -->
+        <div class="mt-10 flex gap-3">
+          <div
+            class="flex items-center border border-brand-black/15 bg-brand-white"
+          >
+            <button
+              type="button"
+              class="h-12 w-12 text-lg transition hover:bg-brand-ivory disabled:opacity-30"
+              [disabled]="soldOut || quantity() <= 1"
+              (click)="quantity.update((q) => q - 1)"
+            >
+              <span class="sr-only">Decrease quantity</span>
+              <span aria-hidden="true">−</span>
+            </button>
+            <span
+              class="w-10 text-center text-sm"
+              aria-live="polite"
+              aria-label="Quantity"
+            >
+              {{ quantity() }}
+            </span>
+            <button
+              type="button"
+              class="h-12 w-12 text-lg transition hover:bg-brand-ivory disabled:opacity-30"
+              [disabled]="soldOut || quantity() >= maxQuantity"
+              (click)="quantity.update((q) => q + 1)"
+            >
+              <span class="sr-only">Increase quantity</span>
+              <span aria-hidden="true">+</span>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="h-12 flex-1 bg-brand-black text-xs tracking-[0.2em] text-brand-white uppercase transition hover:bg-brand-black/80 disabled:cursor-not-allowed disabled:bg-brand-black/30"
+            [disabled]="soldOut"
+          >
+            {{ soldOut ? 'Sold out' : 'Add to bag' }}
+          </button>
+        </div>
+
+        <!-- Details list -->
+        <dl
+          class="mt-12 divide-y divide-brand-black/10 border-y border-brand-black/10 text-sm"
+        >
+          <div class="flex justify-between py-4">
+            <dt class="text-brand-black/50">Reference</dt>
+            <dd>{{ item.sku }}</dd>
+          </div>
+          <div class="flex justify-between py-4">
+            <dt class="text-brand-black/50">Added</dt>
+            <dd>{{ item.dateCreated | date: 'mediumDate' }}</dd>
+          </div>
+          <div class="flex justify-between py-4">
+            <dt class="text-brand-black/50">Shipping</dt>
+            <dd>Free over $50</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+  }
+</section>

@@ -19,31 +19,50 @@ interface GetResponseProductCategory {
 @Service()
 export class ProductService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:8080/api';
+  private readonly baseUrl =
+    'http://localhost:8080/api';
   // private readonly searchUrl = 'http://localhost:8080/api/products/search/findByCategoryId';
 
-  getProductList(theId: number): Observable<Product[]> {
+  getProductList(
+    theId: number,
+  ): Observable<Product[]> {
     const url = `${this.baseUrl}/products/search/findByCategoryId?id=${theId}`;
-    return getProducts();
+    return this.http
+      .get<GetResponseProducts>(url)
+      .pipe(
+        map(
+          (response) =>
+            response._embedded.products,
+        ),
+      );
+  }
 
-    function getProducts(): Observable<Product[]> {
-      return this.http
-        .get<GetResponseProducts>(url)
-        .pipe(map((response: GetResponseProducts) => response._embedded.products));
-    }
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(
+      `${this.baseUrl}/products/${id}`,
+    );
   }
 
   searchProducts(keyword: string): Observable<Product[]> {
     const url = `${this.baseUrl}/products/search/findByNameContaining`;
     return this.http
-      .get<GetResponseProducts>(url, { params: { name: keyword } })
+      .get<GetResponseProducts>(url, {
+        params: { name: keyword },
+      })
       .pipe(map((response) => response._embedded.products));
   }
 
-  getProductCategories(): Observable<ProductCategory[]> {
+  getProductCategories(): Observable<
+    ProductCategory[]
+  > {
     const url = `${this.baseUrl}/product-category`;
     return this.http
       .get<GetResponseProductCategory>(url)
-      .pipe(map((response) => response._embedded.ProductCategory));
+      .pipe(
+        map(
+          (response) =>
+            response._embedded.ProductCategory,
+        ),
+      );
   }
 }

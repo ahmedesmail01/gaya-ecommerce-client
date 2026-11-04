@@ -85,16 +85,18 @@
   } @else {
     <div class="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
       @for (product of products.value(); track product.sku) {
-        @let soldOut = product.unitsInStock === 0;
+        @let soldOut = product.unitInStock === 0;
         <article class="group font-body">
           <div class="relative overflow-hidden bg-brand-white">
-            <img
-              [src]="product.imageUrl"
-              [alt]="product.name"
-              class="aspect-[3/4] w-full object-cover transition duration-700 ease-out group-hover:scale-105"
-              [class.opacity-60]="soldOut"
-              loading="lazy"
-            />
+            <a [routerLink]="['/products', product.id]" tabindex="-1">
+              <img
+                [src]="product.imageUrl"
+                [alt]="product.name"
+                class="aspect-[3/4] w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                [class.opacity-60]="soldOut"
+                loading="lazy"
+              />
+            </a>
 
             @if (soldOut) {
               <span
@@ -102,12 +104,12 @@
               >
                 Sold out
               </span>
-            } @else if (product.unitsInStock <= 5) {
+            } @else if (product.unitInStock <= 5) {
               <span
                 class="absolute top-3 left-3 bg-brand-white px-3 py-1 text-[10px] tracking-[0.2em] uppercase"
               >
                 Only
-                {{ product.unitsInStock }} left
+                {{ product.unitInStock }} left
               </span>
             }
 
@@ -125,7 +127,12 @@
           <div class="mt-4 flex items-start justify-between gap-3">
             <div class="min-w-0">
               <h3 class="truncate font-heading text-base md:text-lg">
-                {{ product.name }}
+                <a
+                  [routerLink]="['/products', product.id]"
+                  class="hover:underline"
+                >
+                  {{ product.name }}
+                </a>
               </h3>
               <p
                 class="mt-1 line-clamp-1 text-xs text-brand-black/50"

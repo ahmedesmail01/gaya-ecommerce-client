@@ -9,10 +9,11 @@ import {
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductService } from '../../services/product';
+import { RouterLink } from '@angular/router';
 import { Search } from '../search/search';
 
 @Component({
-  imports: [CurrencyPipe, Search],
+  imports: [CurrencyPipe, RouterLink, Search],
   selector: 'app-product-list',
   styleUrl: './product-list.css',
   templateUrl: './product-list.html',
