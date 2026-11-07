@@ -136,6 +136,7 @@
             type="button"
             class="h-12 flex-1 bg-brand-black text-xs tracking-[0.2em] text-brand-white uppercase transition hover:bg-brand-black/80 disabled:cursor-not-allowed disabled:bg-brand-black/30"
             [disabled]="soldOut"
+            (click)="addToCart()"
           >
             {{ soldOut ? 'Sold out' : 'Add to bag' }}
           </button>

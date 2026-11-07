@@ -13,6 +13,8 @@ import { ProductService } from '../../services/product';
 import { RouterLink } from '@angular/router';
 import { Search } from '../search/search';
 import { Product } from '../../common/product';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart';
 
 @Component({
   imports: [CurrencyPipe, RouterLink, Search],
@@ -110,6 +112,8 @@ export class ProductList {
     this.selectedCategoryId.set(categoryId);
   }
 
+  private readonly cartService = inject(CartService);
+
   constructor() {
     effect(() => console.log('products', this.products()));
     effect(() => console.log('categories', this.categories.value()));
@@ -120,11 +124,15 @@ export class ProductList {
     (_, i) => i,
   );
 
-  addToCart(product: Product) {
+  addToCart(theProduct: Product) {
     console.log("the product added to the cart " 
-      + product.name + product.sku
+      + theProduct.name + theProduct.sku
     );
 
     // todo later
+    const theCartItem = new CartItem(theProduct.id, theProduct.name, theProduct.imageUrl, theProduct.unitePrice);
+
+    this.cartService.addToCart(theCartItem);
+
   }
 }
