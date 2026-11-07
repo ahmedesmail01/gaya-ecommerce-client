@@ -30,6 +30,20 @@ export const routes: Routes = [
     title: 'Gaya-Store',
   },
   {
+    path: 'cart-details',
+    loadComponent: () =>
+      import('./components/cart-details/cart-details').then(
+        (m) => m.CartDetails,
+      ),
+    title: 'Gaya-Store',
+  },
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./components/checkout/checkout').then((m) => m.Checkout),
+    title: 'Gaya-Store',
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about').then((m) => m.About),

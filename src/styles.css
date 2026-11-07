@@ -31,3 +31,18 @@
     font-family: var(--font-heading);
   }
 }
+
+/* Form fields (checkout and future forms) */
+@layer components {
+  .field-label {
+    @apply mb-1.5 block text-xs tracking-[0.15em] text-brand-black/60 uppercase;
+  }
+
+  .field-input {
+    @apply block h-12 w-full border border-brand-black/15 bg-brand-white px-4 text-sm text-brand-black transition outline-none placeholder:text-brand-black/30 focus:border-brand-black focus:ring-0;
+  }
+
+  .field-input[aria-invalid='true'] {
+    @apply border-red-700 focus:border-red-700;
+  }
+}

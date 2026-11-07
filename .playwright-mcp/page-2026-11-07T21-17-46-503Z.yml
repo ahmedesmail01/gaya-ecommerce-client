@@ -1,0 +1,72 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - link [ref=e5] [cursor=pointer]:
+        - /url: https://flowbite.com/
+        - img "Gaya-Store Logo" [ref=e6]
+      - generic [ref=e7]:
+        - button "Open user menu user photo" [ref=e8]:
+          - generic [ref=e9]: Open user menu
+          - img "user photo" [ref=e10]
+        - link "View cart" [ref=e12] [cursor=pointer]:
+          - /url: /cart-details
+          - paragraph [ref=e18]: "0"
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "Home" [ref=e22] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e23]:
+          - link "Products" [ref=e24] [cursor=pointer]:
+            - /url: /products
+        - listitem [ref=e25]:
+          - link "Categories" [ref=e26] [cursor=pointer]:
+            - /url: /categories
+        - listitem [ref=e27]:
+          - link "About" [ref=e28] [cursor=pointer]:
+            - /url: /about
+  - generic [ref=e30]:
+    - link "Back to collection" [ref=e31] [cursor=pointer]:
+      - /url: /products
+    - article [ref=e34]:
+      - img "Basic Cotton T-Shirt - White" [ref=e36]
+      - generic [ref=e37]:
+        - paragraph [ref=e38]: SKU TS-BSC-WHT-M
+        - heading "Basic Cotton T-Shirt - White" [level=1] [ref=e39]
+        - paragraph [ref=e40]: $9.99
+        - paragraph [ref=e41]: In stock
+        - paragraph [ref=e43]: 100% cotton crew-neck tee, regular fit
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - button "Decrease quantity" [disabled] [ref=e46]: −
+            - generic "Quantity" [ref=e48]: "1"
+            - button "Increase quantity" [ref=e49]: +
+          - button "Add to bag" [ref=e51]
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - term [ref=e54]: Reference
+            - definition [ref=e55]: TS-BSC-WHT-M
+          - generic [ref=e56]:
+            - term [ref=e57]: Added
+            - definition [ref=e58]: Oct 23, 2026
+          - generic [ref=e59]:
+            - term [ref=e60]: Shipping
+            - definition [ref=e61]: Free over $50
+  - contentinfo [ref=e62]:
+    - generic [ref=e63]:
+      - text: © 2023
+      - link "Gaya Store" [ref=e64] [cursor=pointer]:
+        - /url: https://flowbite.com/
+      - text: . All Rights Reserved.
+    - list [ref=e65]:
+      - listitem [ref=e66]:
+        - link "About" [ref=e67] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e68]:
+        - link "Privacy Policy" [ref=e69] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e70]:
+        - link "Licensing" [ref=e71] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e72]:
+        - link "Contact" [ref=e73] [cursor=pointer]:
+          - /url: "#"

@@ -22,6 +22,26 @@ export class CartService {
         this.computeCartTotal();
     }
 
+    incrementQuantity(theCartItem: CartItem) {
+        theCartItem.quantity++;
+        this.computeCartTotal();
+    }
+
+    decrementQuantity(theCartItem: CartItem) {
+        if (theCartItem.quantity <= 1) return;
+        theCartItem.quantity--;
+        this.computeCartTotal();
+    }
+
+    remove(theCartItem: CartItem) {
+        const index = this.cartItems.findIndex(item => item.id === theCartItem.id);
+        if (index > -1) {
+            // splice keeps the same array, so every component holding it sees the change
+            this.cartItems.splice(index, 1);
+            this.computeCartTotal();
+        }
+    }
+
     computeCartTotal() {
         let totalPriceValue = 0;
         let totalQuantityValue = 0;
