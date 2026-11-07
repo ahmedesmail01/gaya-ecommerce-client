@@ -16,12 +16,12 @@
 
       <app-search (searchChange)="searchKeyword.set($event)" />
   
-      @if (products.hasValue() && products.value().length) {
+      @if (page().totalElements) {
         <p
           class="font-body text-xs tracking-[0.2em] text-brand-stone uppercase"
         >
-          {{ products.value().length }}
-          {{ products.value().length === 1 ? 'piece' : 'pieces' }}
+          {{ page().totalElements }}
+          {{ page().totalElements === 1 ? 'piece' : 'pieces' }}
         </p>
       }
     </div>
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  @if (products.isLoading()) {
+  @if (productPage.isLoading()) {
     <div
       class="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4"
       aria-busy="true"
@@ -65,7 +65,7 @@
         </div>
       }
     </div>
-  } @else if (products.error()) {
+  } @else if (productPage.error()) {
     <div
       class="flex flex-col items-center py-24 text-center font-body"
     >
@@ -77,14 +77,14 @@
       <button
         type="button"
         class="mt-8 border border-brand-black px-8 py-3 text-xs tracking-[0.2em] uppercase transition hover:bg-brand-black hover:text-brand-white"
-        (click)="products.reload()"
+        (click)="productPage.reload()"
       >
         Try again
       </button>
     </div>
   } @else {
     <div class="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
-      @for (product of products.value(); track product.sku) {
+      @for (product of products(); track product.sku) {
         @let soldOut = product.unitInStock === 0;
         <article class="group font-body">
           <div class="relative overflow-hidden bg-brand-white">
@@ -116,10 +116,11 @@
             @if (!soldOut) {
               <button
                 type="button"
+                (click)="addToCart(product)"
                 class="absolute inset-x-3 bottom-3 bg-brand-black py-3 text-xs tracking-[0.2em] text-brand-white uppercase transition duration-300 hover:bg-brand-black/80 lg:translate-y-4 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:focus-visible:translate-y-0 lg:focus-visible:opacity-100"
                 [attr.aria-label]="'Add ' + product.name + ' to bag'"
               >
-                Add to bag
+                Add to cart
               </button>
             }
           </div>
@@ -156,5 +157,47 @@
         </div>
       }
     </div>
+
+    @if (page().totalPages > 1) {
+      <nav
+        class="mt-16 flex items-center justify-center gap-2 font-body text-xs tracking-[0.2em] uppercase"
+        aria-label="Pagination"
+      >
+        <button
+          type="button"
+          class="border border-brand-black/10 px-4 py-2 transition hover:bg-brand-black hover:text-brand-white disabled:pointer-events-none disabled:opacity-30"
+          [disabled]="page().number === 0"
+          (click)="goToPage(page().number - 1)"
+        >
+          Prev
+        </button>
+
+        @for (p of visiblePages(); track p) {
+          <button
+            type="button"
+            class="min-w-10 border border-brand-black/10 px-3 py-2 transition hover:bg-brand-black hover:text-brand-white aria-[current=page]:bg-brand-black aria-[current=page]:text-brand-white"
+            [attr.aria-current]="p === page().number ? 'page' : null"
+            (click)="goToPage(p)"
+          >
+            {{ p + 1 }}
+          </button>
+        }
+
+        <button
+          type="button"
+          class="border border-brand-black/10 px-4 py-2 transition hover:bg-brand-black hover:text-brand-white disabled:pointer-events-none disabled:opacity-30"
+          [disabled]="page().number >= page().totalPages - 1"
+          (click)="goToPage(page().number + 1)"
+        >
+          Next
+        </button>
+      </nav>
+
+      <p
+        class="mt-4 text-center font-body text-xs text-brand-black/50"
+      >
+        Page {{ page().number + 1 }} of {{ page().totalPages }}
+      </p>
+    }
   }
 </section>

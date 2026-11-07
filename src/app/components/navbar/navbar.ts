@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CartStatus } from '../cart-status/cart-status';
 
 @Component({
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CartStatus],
   selector: 'app-navbar',
   styleUrl: './navbar.css',
   templateUrl: './navbar.html',

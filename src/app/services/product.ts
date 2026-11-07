@@ -4,10 +4,23 @@ import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
 
+export interface PageInfo {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+}
+
+export interface ProductPage {
+  products: Product[];
+  page: PageInfo;
+}
+
 interface GetResponseProducts {
   _embedded: {
     products: Product[];
   };
+  page: PageInfo;
 }
 
 interface GetResponseProductCategory {
@@ -16,25 +29,28 @@ interface GetResponseProductCategory {
   };
 }
 
+function toProductPage(response: GetResponseProducts): ProductPage {
+  return { products: response._embedded.products, page: response.page };
+}
+
 @Service()
 export class ProductService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl =
-    'http://localhost:8080/api';
+    'http://localhost:8081/api';
   // private readonly searchUrl = 'http://localhost:8080/api/products/search/findByCategoryId';
 
   getProductList(
     theId: number,
-  ): Observable<Product[]> {
-    const url = `${this.baseUrl}/products/search/findByCategoryId?id=${theId}`;
+    page: number,
+    size: number,
+  ): Observable<ProductPage> {
+    const url = `${this.baseUrl}/products/search/findByCategoryId`;
     return this.http
-      .get<GetResponseProducts>(url)
-      .pipe(
-        map(
-          (response) =>
-            response._embedded.products,
-        ),
-      );
+      .get<GetResponseProducts>(url, {
+        params: { id: theId, page, size },
+      })
+      .pipe(map(toProductPage));
   }
 
   getProduct(id: number): Observable<Product> {
@@ -43,13 +59,17 @@ export class ProductService {
     );
   }
 
-  searchProducts(keyword: string): Observable<Product[]> {
+  searchProducts(
+    keyword: string,
+    page: number,
+    size: number,
+  ): Observable<ProductPage> {
     const url = `${this.baseUrl}/products/search/findByNameContaining`;
     return this.http
       .get<GetResponseProducts>(url, {
-        params: { name: keyword },
+        params: { name: keyword, page, size },
       })
-      .pipe(map((response) => response._embedded.products));
+      .pipe(map(toProductPage));
   }
 
   getProductCategories(): Observable<
