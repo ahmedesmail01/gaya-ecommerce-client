@@ -3,6 +3,7 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   Injector,
@@ -15,6 +16,11 @@ import {
   emptyCheckoutForm,
   type CheckoutFormModel,
 } from '../../common/checkout-form';
+import {
+  detectCardBrand,
+  formatCardNumber,
+  maskCardNumber,
+} from '../../common/credit-card';
 import { CartService } from '../../services/cart';
 import { FieldErrors } from '../field-errors/field-errors';
 import { AddressFields } from './address-fields/address-fields';
@@ -54,6 +60,42 @@ export class Checkout {
 
   protected readonly orderPlaced = signal(false);
 
+  protected readonly cardBrand = computed(
+    () => detectCardBrand(this.checkoutForm.creditCard.cardNumber().value())?.name,
+  );
+
+  protected readonly months = Array.from({ length: 12 }, (_, i) =>
+    String(i + 1).padStart(2, '0'),
+  );
+  protected readonly years = Array.from({ length: 11 }, (_, i) =>
+    String(new Date().getFullYear() + i),
+  );
+
+  /** Keeps only digits and groups them as the user types. */
+  protected formatCardNumber(event: Event) {
+    this.reformat(event, formatCardNumber, this.checkoutForm.creditCard.cardNumber().value);
+  }
+
+  protected formatSecurityCode(event: Event) {
+    this.reformat(
+      event,
+      (v) => v.replace(/\D/g, '').slice(0, 4),
+      this.checkoutForm.creditCard.securityCode().value,
+    );
+  }
+
+  /** Updates both the element and the model, so it works whichever input listener runs first. */
+  private reformat(
+    event: Event,
+    format: (value: string) => string,
+    model: { set(value: string): void },
+  ) {
+    const input = event.target as HTMLInputElement;
+    const formatted = format(input.value);
+    if (formatted !== input.value) input.value = formatted;
+    model.set(formatted);
+  }
+
   private placeOrder() {
     const value = this.model();
     const order = {
@@ -62,6 +104,12 @@ export class Checkout {
       billingAddress: value.billingSameAsShipping
         ? value.shippingAddress
         : value.billingAddress,
+      // Never keep or log the full card details; send them to a payment provider instead.
+      payment: {
+        brand: this.cardBrand(),
+        card: maskCardNumber(value.creditCard.cardNumber),
+        expires: `${value.creditCard.expirationMonth}/${value.creditCard.expirationYear}`,
+      },
       items: this.cartItems.map(({ id, quantity, unitPrice }) => ({
         productId: id,
         quantity,

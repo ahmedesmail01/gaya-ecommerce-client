@@ -59,6 +59,11 @@ describe('Checkout', () => {
     type('#shipping-city', 'Cairo');
     type('#shipping-state', 'Cairo');
     type('#shipping-zip', '11511');
+    type('#card-name', 'Ahmed Esmail');
+    type('#card-number', '4242424242424242');
+    type('#card-exp-month', '12');
+    type('#card-exp-year', String(new Date().getFullYear() + 2));
+    type('#card-cvc', '123');
     await fixture.whenStable();
 
     await submit();
@@ -73,5 +78,13 @@ describe('Checkout', () => {
     await fixture.whenStable();
 
     expect(el.querySelector('#billing-street')).not.toBeNull();
+  });
+
+  it('groups the card number and names the brand as the user types', async () => {
+    type('#card-number', '4242424242424242');
+    await fixture.whenStable();
+
+    expect(query<HTMLInputElement>('#card-number').value).toBe('4242 4242 4242 4242');
+    expect(query('#card-number-brand').textContent).toContain('Visa');
   });
 });

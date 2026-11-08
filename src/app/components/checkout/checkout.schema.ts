@@ -11,8 +11,9 @@ import {
   type SchemaPath,
   type SchemaPathRules,
 } from '@angular/forms/signals';
-import type { Address, CheckoutFormModel } from '../../common/checkout-form';
+import type { Address, CheckoutFormModel, CreditCard } from '../../common/checkout-form';
 import { findCountry } from '../../common/country';
+import { cardDigits, detectCardBrand, isExpired, passesLuhn } from '../../common/credit-card';
 
 /** Letters (any language), spaces, apostrophes, dots and hyphens; must start with a letter. */
 const NAME_PATTERN = /^\p{L}[\p{L}\p{M}' .-]*$/u;
@@ -65,6 +66,57 @@ export const addressSchema = schema<Address>((a) => {
   });
 });
 
+export const creditCardSchema = schema<CreditCard>((c) => {
+  personName(c.nameOnCard, 'Name on card');
+
+  requiredText(c.cardNumber, 'Card number');
+  validate(c.cardNumber, ({ value }) => {
+    const digits = cardDigits(value());
+    if (digits === '') return undefined; // reported by required
+    if (!/^\d+$/.test(digits)) {
+      return { kind: 'cardFormat', message: 'Card number can only contain digits' };
+    }
+    const brand = detectCardBrand(digits);
+    if (!brand) {
+      return {
+        kind: 'cardBrand',
+        message: 'We accept Visa, Mastercard, American Express and Discover',
+      };
+    }
+    if (!brand.lengths.includes(digits.length)) {
+      return {
+        kind: 'cardLength',
+        message: `${brand.name} card numbers are ${brand.lengths.join(' or ')} digits`,
+      };
+    }
+    if (!passesLuhn(digits)) {
+      return { kind: 'cardChecksum', message: 'Check your card number for typos' };
+    }
+    return undefined;
+  });
+
+  required(c.expirationMonth, { message: 'Select the expiry month' });
+  required(c.expirationYear, { message: 'Select the expiry year' });
+  // Shown on the month so the error sits under the expiry fields; re-checks when the year changes.
+  validate(c.expirationMonth, ({ value, valueOf }) => {
+    const year = valueOf(c.expirationYear);
+    return value() && year && isExpired(value(), year)
+      ? { kind: 'expired', message: 'This card has expired' }
+      : undefined;
+  });
+
+  requiredText(c.securityCode, 'Security code');
+  // Amex uses a 4-digit code on the front; everyone else 3 on the back.
+  validate(c.securityCode, ({ value, valueOf }) => {
+    if (value() === '') return undefined;
+    const length = detectCardBrand(valueOf(c.cardNumber))?.cvcLength;
+    const ok = length ? new RegExp(`^\\d{${length}}$`).test(value()) : /^\d{3,4}$/.test(value());
+    return ok
+      ? undefined
+      : { kind: 'cvc', message: `Security code must be ${length ?? '3 or 4'} digits` };
+  });
+});
+
 export const checkoutSchema = schema<CheckoutFormModel>((p) => {
   personName(p.customer.firstName, 'First name');
   personName(p.customer.lastName, 'Last name');
@@ -81,4 +133,6 @@ export const checkoutSchema = schema<CheckoutFormModel>((p) => {
     ({ valueOf }) => !valueOf(p.billingSameAsShipping),
     addressSchema,
   );
+
+  apply(p.creditCard, creditCardSchema);
 });

@@ -13,11 +13,23 @@ export interface Address {
   zipCode: string;
 }
 
+export interface CreditCard {
+  nameOnCard: string;
+  /** As typed, may contain spaces between digit groups. */
+  cardNumber: string;
+  /** '01'–'12'. */
+  expirationMonth: string;
+  /** Four digits, e.g. '2028'. */
+  expirationYear: string;
+  securityCode: string;
+}
+
 export interface CheckoutFormModel {
   customer: Customer;
   shippingAddress: Address;
   billingSameAsShipping: boolean;
   billingAddress: Address;
+  creditCard: CreditCard;
 }
 
 export function emptyAddress(): Address {
@@ -30,5 +42,12 @@ export function emptyCheckoutForm(): CheckoutFormModel {
     shippingAddress: emptyAddress(),
     billingSameAsShipping: true,
     billingAddress: emptyAddress(),
+    creditCard: {
+      nameOnCard: '',
+      cardNumber: '',
+      expirationMonth: '',
+      expirationYear: '',
+      securityCode: '',
+    },
   };
 }

@@ -138,6 +138,108 @@
           </fieldset>
         </div>
 
+        <!-- Payment -->
+        @let card = f.creditCard;
+        <div class="border-t border-brand-black/10 pt-12">
+          <fieldset>
+            <legend class="mb-6 font-heading text-2xl">Payment</legend>
+            <div class="grid gap-x-4 gap-y-5 sm:grid-cols-2">
+              <div class="sm:col-span-2">
+                <label for="card-name" class="field-label">Name on card</label>
+                <input
+                  id="card-name"
+                  type="text"
+                  [formField]="card.nameOnCard"
+                  autocomplete="cc-name"
+                  [attr.aria-invalid]="card.nameOnCard().touched() && card.nameOnCard().invalid()"
+                  aria-describedby="card-name-error"
+                  class="field-input"
+                />
+                <app-field-errors [state]="card.nameOnCard()" id="card-name-error" />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="card-number" class="field-label">Card number</label>
+                <input
+                  id="card-number"
+                  type="text"
+                  [formField]="card.cardNumber"
+                  (input)="formatCardNumber($event)"
+                  autocomplete="cc-number"
+                  inputmode="numeric"
+                  placeholder="1234 5678 9012 3456"
+                  [attr.aria-invalid]="card.cardNumber().touched() && card.cardNumber().invalid()"
+                  aria-describedby="card-number-brand card-number-error"
+                  class="field-input"
+                />
+                @if (cardBrand(); as brand) {
+                  <p id="card-number-brand" class="mt-1.5 text-xs text-brand-black/50">
+                    {{ brand }}
+                  </p>
+                }
+                <app-field-errors [state]="card.cardNumber()" id="card-number-error" />
+              </div>
+
+              <div>
+                <span class="field-label" id="card-expiry-label">Expiry date</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <select
+                    id="card-exp-month"
+                    [formField]="card.expirationMonth"
+                    autocomplete="cc-exp-month"
+                    aria-label="Expiry month"
+                    [attr.aria-invalid]="
+                      card.expirationMonth().touched() && card.expirationMonth().invalid()
+                    "
+                    aria-describedby="card-exp-month-error"
+                    class="field-input"
+                  >
+                    <option value="" disabled>MM</option>
+                    @for (month of months; track month) {
+                      <option [value]="month">{{ month }}</option>
+                    }
+                  </select>
+                  <select
+                    id="card-exp-year"
+                    [formField]="card.expirationYear"
+                    autocomplete="cc-exp-year"
+                    aria-label="Expiry year"
+                    [attr.aria-invalid]="
+                      card.expirationYear().touched() && card.expirationYear().invalid()
+                    "
+                    aria-describedby="card-exp-year-error"
+                    class="field-input"
+                  >
+                    <option value="" disabled>YYYY</option>
+                    @for (year of years; track year) {
+                      <option [value]="year">{{ year }}</option>
+                    }
+                  </select>
+                </div>
+                <app-field-errors [state]="card.expirationMonth()" id="card-exp-month-error" />
+                <app-field-errors [state]="card.expirationYear()" id="card-exp-year-error" />
+              </div>
+
+              <div>
+                <label for="card-cvc" class="field-label">Security code</label>
+                <input
+                  id="card-cvc"
+                  type="text"
+                  [formField]="card.securityCode"
+                  (input)="formatSecurityCode($event)"
+                  autocomplete="cc-csc"
+                  inputmode="numeric"
+                  placeholder="CVC"
+                  [attr.aria-invalid]="card.securityCode().touched() && card.securityCode().invalid()"
+                  aria-describedby="card-cvc-error"
+                  class="field-input"
+                />
+                <app-field-errors [state]="card.securityCode()" id="card-cvc-error" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
         @if (f().submitting()) {
           <p class="sr-only" role="status">Placing your order…</p>
         }
