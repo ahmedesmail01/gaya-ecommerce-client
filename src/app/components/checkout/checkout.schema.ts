@@ -12,7 +12,7 @@ import {
   type SchemaPathRules,
 } from '@angular/forms/signals';
 import type { Address, CheckoutFormModel, CreditCard } from '../../common/checkout-form';
-import { findCountry } from '../../common/country';
+// import { findCountry } from '../../common/country';
 import { cardDigits, detectCardBrand, isExpired, passesLuhn } from '../../common/credit-card';
 
 /** Letters (any language), spaces, apostrophes, dots and hyphens; must start with a letter. */
@@ -60,10 +60,10 @@ export const addressSchema = schema<Address>((a) => {
 
   requiredText(a.zipCode, 'Postal code');
   // The format depends on the selected country and re-checks when it changes.
-  pattern(a.zipCode, ({ valueOf }) => findCountry(valueOf(a.country))?.postalCode, {
-    message: ({ valueOf }) =>
-      `Enter a valid postal code, e.g. ${findCountry(valueOf(a.country))?.postalExample}`,
-  });
+  // pattern(a.zipCode, ({ valueOf }) => findCountry(valueOf(a.country))?.postalCode, {
+  //   message: ({ valueOf }) =>
+  //     `Enter a valid postal code, e.g. ${findCountry(valueOf(a.country))?.postalExample}`,
+  // });
 });
 
 export const creditCardSchema = schema<CreditCard>((c) => {

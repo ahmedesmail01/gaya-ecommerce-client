@@ -11,9 +11,10 @@
       [attr.aria-invalid]="a.country().touched() && a.country().invalid()"
       [attr.aria-describedby]="s + '-country-error'"
       class="field-input"
+      (change) ="this.selectedCountryCode.set($any($event.target).value)"
     >
       <option value="" disabled>Select a country</option>
-      @for (country of countries; track country.code) {
+      @for (country of countries(); track country.id) {
         <option [value]="country.code">{{ country.name }}</option>
       }
     </select>
@@ -50,19 +51,23 @@
 
   <div>
     <label [for]="s + '-state'" class="field-label">State / province</label>
-    <input
-      type="text"
+    <select
       [id]="s + '-state'"
       [formField]="a.state"
       [attr.autocomplete]="s + ' address-level1'"
       [attr.aria-invalid]="a.state().touched() && a.state().invalid()"
       [attr.aria-describedby]="s + '-state-error'"
       class="field-input"
-    />
+    >
+      <option value="" disabled>Select a state</option>
+      @for (state of states(); track state.id) {
+        <option [value]="state.id">{{ state.name }}</option>
+      }
+    </select>
     <app-field-errors [state]="a.state()" [id]="s + '-state-error'" />
   </div>
 
-  <div>
+  <!-- <div>
     <label [for]="s + '-zip'" class="field-label">Postal code</label>
     <input
       type="text"
@@ -79,5 +84,5 @@
       </p>
     }
     <app-field-errors [state]="a.zipCode()" [id]="s + '-zip-error'" />
-  </div>
+  </div> -->
 </div>
